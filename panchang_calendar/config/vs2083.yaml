@@ -1,0 +1,235 @@
+# Vikram Samvat 2083 — Pūrṇimānta desk calendar (13-month leap year).
+# Edit this file to change the calendar; no code changes required.
+# Dates are Gregorian (YYYY-MM-DD). Photo paths are relative to THIS file.
+calendar:
+  samvat: 2083
+  reckoning: purnimanta
+  gregorian_span: "4 Mar 2026 – 23 Mar 2027"
+  cover:
+    title: "Vikram Samvat"
+    subtitle: "Thirteen lunar months · 4 Mar 2026 – 23 Mar 2027 · Pūrṇimānta"
+    note: >-
+      VS 2083 has a thirteenth month — adhika māsa (Adhika Jyeshtha). In the
+      pūrṇimānta system each month runs full moon → full moon: waning krishna
+      (१ → ○ अमावस्या), then waxing shukla (१ → १५, ● पूर्णिमा, month-end).
+      Devanagari numerals mark the tithi; small text marks the Gregorian date.
+
+theme:
+  page: {width_in: 10, height_in: 3.5, dpi: 300, top_safe_mm: 8, calendar_pct: 42}
+  fonts:
+    devanagari: "Noto Sans Devanagari"
+    serif: "Noto Serif"
+    quote: "Cormorant Garamond"
+  ritu:
+    vasanta:  {accent: "#4E8B3A", shukla: "#e8f2e2", krishna: "#d2e4c8"}
+    grishma:  {accent: "#C8771B", shukla: "#f7ecda", krishna: "#f0dcc2"}
+    varsha:   {accent: "#1F8A8A", shukla: "#ddf0f0", krishna: "#c8e2e2"}
+    sharad:   {accent: "#C0561E", shukla: "#f9e8dd", krishna: "#f0d4c4"}
+    hemanta:  {accent: "#5B4B9A", shukla: "#eae5f4", krishna: "#d9d2ea"}
+    shishira: {accent: "#3F6B8C", shukla: "#e2ecf2", krishna: "#cddde8"}
+
+months:
+  - name_dev: "चैत्र"
+    name_rom: "Chaitra"
+    ritu: vasanta
+    season_label: "Vasanta (spring)"
+    start: 2026-03-04
+    amavasya: 2026-03-18
+    end: 2026-04-02
+    photo: ../assets/images/01.jpg
+    quote:
+      text: "When stillness arises from intense alertness and awareness, your perception opens up in ways that you have never thought possible."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "S1",  label: "Gudi Padwa · Ugadi"}
+      - {tithi: "S9",  label: "Rāma Navamī"}
+      - {tithi: "S15", label: "Hanumān Jayantī"}
+
+  - name_dev: "वैशाख"
+    name_rom: "Vaishakha"
+    ritu: vasanta
+    season_label: "Vasanta (spring)"
+    start: 2026-04-03
+    amavasya: 2026-04-17
+    end: 2026-05-02
+    photo: ../assets/images/02.jpg
+    quote:
+      text: "Devotion means keeping your intellect aside to let a larger intelligence function through you."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "S3",  label: "Akshaya Tritīyā"}
+      - {tithi: "S15", label: "Buddha Pūrṇimā"}
+
+  - name_dev: "अधिक ज्येष्ठ"
+    name_rom: "Adhika Jyeshtha"
+    adhika: true
+    ritu: grishma
+    season_label: "Grīshma (summer)"
+    start: 2026-05-03
+    amavasya: 2026-05-16
+    end: 2026-05-31
+    photo: ../assets/images/03.jpg
+    quote:
+      text: "If you want Transformation, the largest part has to happen in your Body, because the Body carries substantially more memory than the Mind."
+      attribution: "Sadhguru"
+    festivals: []
+
+  - name_dev: "ज्येष्ठ"
+    name_rom: "Jyeshtha"
+    ritu: grishma
+    season_label: "Grīshma (summer)"
+    start: 2026-06-01
+    amavasya: 2026-06-14
+    end: 2026-06-29
+    photo: ../assets/images/04.jpg
+    quote:
+      text: "Success means doing something the way it works."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "S10", label: "Gangā Dussehra"}
+      - {tithi: "S11", label: "Nirjalā Ekādashī"}
+      - {tithi: "S15", label: "Vat Pūrṇimā"}
+
+  - name_dev: "आषाढ"
+    name_rom: "Ashadha"
+    ritu: varsha
+    season_label: "Varshā (monsoon)"
+    start: 2026-06-30
+    amavasya: 2026-07-14
+    end: 2026-07-29
+    photo: ../assets/images/05.jpg
+    quote:
+      text: "May you realize the true purpose and potential of life. On this Guru Purnima, grace is upon you. I am with you."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "S2",  label: "Rath Yātrā"}
+      - {tithi: "S11", label: "Devshayanī Ekādashī"}
+      - {tithi: "S15", label: "Guru Pūrṇimā"}
+
+  - name_dev: "श्रावण"
+    name_rom: "Shravana"
+    ritu: varsha
+    season_label: "Varshā (monsoon)"
+    start: 2026-07-30
+    amavasya: 2026-08-12
+    end: 2026-08-27
+    photo: ../assets/images/06.jpg
+    quote:
+      text: "Your ways of thinking and feeling, your likes and dislikes, your philosophies and ideologies all melt down when you fall in love."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "S5",  label: "Nāg Panchamī"}
+      - {tithi: "S15", label: "Rakshā Bandhan"}
+
+  - name_dev: "भाद्रपद"
+    name_rom: "Bhadrapada"
+    ritu: sharad
+    season_label: "Sharad (autumn)"
+    start: 2026-08-28
+    amavasya: 2026-09-10
+    end: 2026-09-25
+    photo: ../assets/images/07.jpg
+    quote:
+      text: "If you want to explore the deepest dimensions of life playfully, you need a heart full of love, a joyful mind, and a vibrant body."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "K8",  label: "Janmāshtamī"}
+      - {tithi: "S4",  label: "Gaṇesha Chaturthī"}
+      - {tithi: "S14", label: "Anant Chaturdashī"}
+
+  - name_dev: "आश्विन"
+    name_rom: "Ashwina"
+    ritu: sharad
+    season_label: "Sharad (autumn)"
+    start: 2026-09-26
+    amavasya: 2026-10-10
+    end: 2026-10-25
+    photo: ../assets/images/08.jpg
+    quote:
+      text: "If you treat your tools, including your own body and mind, with reverence, every activity will be a fruitful and joyful process."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "K1",  label: "Pitru Paksha begins"}
+      - {tithi: "S1",  label: "Sharad Navrātri"}
+      - {tithi: "S10", label: "Dussehra"}
+      - {tithi: "S15", label: "Sharad Pūrṇimā"}
+
+  - name_dev: "कार्तिक"
+    name_rom: "Kartika"
+    ritu: hemanta
+    season_label: "Hemanta (pre-winter)"
+    start: 2026-10-26
+    amavasya: 2026-11-08
+    end: 2026-11-23
+    photo: ../assets/images/09.jpg
+    quote:
+      text: "Lighting up in joy, love, and consciousness is vital in times of crisis. This Diwali, light up your Humanity to its full glory."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "K13",       label: "Dhanteras"}
+      - {tithi: "Amavasya",  label: "DIWALI"}
+      - {tithi: "S1",        label: "Govardhan Pūjā"}
+      - {tithi: "S2",        label: "Bhai Dooj"}
+      - {tithi: "S11",       label: "Dev Uthanī Ekādashī"}
+      - {tithi: "S15",       label: "Kārtik Pūrṇimā"}
+
+  - name_dev: "मार्गशीर्ष"
+    name_rom: "Margashirsha"
+    ritu: hemanta
+    season_label: "Hemanta (pre-winter)"
+    start: 2026-11-24
+    amavasya: 2026-12-08
+    end: 2026-12-23
+    photo: ../assets/images/10.jpg
+    quote:
+      text: "The word Yoga means union. That means you consciously obliterate the boundaries of individuality and reverberate with the rest of the cosmos."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "S11", label: "Gītā Jayantī"}
+      - {tithi: "S15", label: "Dattātreya Jayantī"}
+
+  - name_dev: "पौष"
+    name_rom: "Pausha"
+    ritu: shishira
+    season_label: "Shishira (winter)"
+    start: 2026-12-24
+    amavasya: 2027-01-07
+    end: 2027-01-22
+    photo: ../assets/images/11.jpg
+    quote:
+      text: "This is an ideal day to clear your home, your mind, and your emotions of all that is redundant, and make a Fresh Start."
+      attribution: "Sadhguru"
+    festivals:
+      - {date: 2027-01-14, label: "Makar Sankrānti"}
+      - {tithi: "S15",     label: "Pausha Pūrṇimā"}
+
+  - name_dev: "माघ"
+    name_rom: "Magha"
+    ritu: shishira
+    season_label: "Shishira (winter)"
+    start: 2027-01-23
+    amavasya: 2027-02-06
+    end: 2027-02-21
+    photo: ../assets/images/12.jpg
+    quote:
+      text: "Life is not in its goal. Life is in its process – in how you Experience it within yourself right now."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "S5",  label: "Vasant Panchamī"}
+      - {tithi: "S15", label: "Māghī Pūrṇimā"}
+
+  - name_dev: "फाल्गुन"
+    name_rom: "Phalguna"
+    ritu: shishira
+    season_label: "Shishira (winter)"
+    start: 2027-02-22
+    amavasya: 2027-03-08
+    end: 2027-03-23
+    photo: ../assets/images/13.jpg
+    quote:
+      text: "Adiyogi Shiva is the source of the science of yoga. His relevance is not in his ancientness but of the future."
+      attribution: "Sadhguru"
+    festivals:
+      - {tithi: "K14", label: "Mahā Shivarātri"}
+      - {tithi: "S14", label: "Holikā Dahan"}
+      - {tithi: "S15", label: "HOLI"}
