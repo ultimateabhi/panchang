@@ -84,7 +84,7 @@ table.grid {{ width:100%; border-collapse:collapse; table-layout:fixed; flex:1; 
 
 def month_html(cal: Calendar, m: MonthData) -> str:
     pal = cal.theme.ritu[m.ritu]
-    style_vars = f"--accent:{pal.accent};--krishna:{pal.krishna};--shukla:{pal.shukla}"
+    style_vars = f"--accent:{_esc(pal.accent)};--krishna:{_esc(pal.krishna)};--shukla:{_esc(pal.shukla)}"
     img = _img_data_uri(m.photo)
     span = (f"{P.greg_label(m.start)} – {P.greg_label(m.end)} {m.end.year}"
             f" · {(m.end - m.start).days + 1} days")
@@ -103,7 +103,7 @@ def month_html(cal: Calendar, m: MonthData) -> str:
                 continue
             klass = "kr" if c.paksha == "K" else "sh"
             fest = f'<span class="fest">{_esc(c.festival)}</span>' if c.festival else ""
-            badge = f'<span class="badge dev">{c.badge}</span>' if c.badge else ""
+            badge = f'<span class="badge dev">{_esc(c.badge)}</span>' if c.badge else ""
             rows += (f'<td class="{klass}"><div class="cellnum">'
                      f'<span class="tithi dev">{P.deva(c.tithi)}</span>'
                      f'<span class="greg">{P.greg_label(c.date)}</span></div>'
@@ -112,9 +112,9 @@ def month_html(cal: Calendar, m: MonthData) -> str:
 
     kr = P.krishna_length(m)
     legend = (f'<div class="legend">'
-              f'<span><span class="sw" style="background:{pal.krishna}"></span>'
+              f'<span><span class="sw" style="background:{_esc(pal.krishna)}"></span>'
               f'<span class="dev">कृष्ण १→{P.deva(kr)} ○</span></span>'
-              f'<span><span class="sw" style="background:{pal.shukla}"></span>'
+              f'<span><span class="sw" style="background:{_esc(pal.shukla)}"></span>'
               f'<span class="dev">शुक्ल १→१५ ●</span></span></div>')
 
     body = f"""<section class="panel" style="{style_vars}">
@@ -141,11 +141,11 @@ def cover_html(cal: Calendar) -> str:
         pal_m = cal.theme.ritu[m.ritu]
         span = f"{P.greg_label(m.start)} – {P.greg_label(m.end)} '{str(m.end.year)[2:]}"
         star = " ★" if m.adhika else ""
-        rows += (f'<tr><td class="ci" style="color:{pal_m.accent}">{m.index:02d}</td>'
+        rows += (f'<tr><td class="ci" style="color:{_esc(pal_m.accent)}">{m.index:02d}</td>'
                  f'<td><span class="dev">{_esc(m.name_dev)}</span> '
                  f'<b>{_esc(m.name_rom)}</b>{star}</td>'
                  f'<td class="cspan">{_esc(span)}</td>'
-                 f'<td class="cse" style="color:{pal_m.accent}">'
+                 f'<td class="cse" style="color:{_esc(pal_m.accent)}">'
                  f'{_esc(m.season_label.split(" ")[0])}</td></tr>')
 
     extra = """
@@ -161,7 +161,7 @@ def cover_html(cal: Calendar) -> str:
 .cov-tbl .cspan { color:#5d5345; white-space:nowrap; }
 .cov-tbl .cse { white-space:nowrap; }
 """
-    body = f"""<section class="panel cover" style="--accent:{pal.accent}">
+    body = f"""<section class="panel cover" style="--accent:{_esc(pal.accent)}">
   <div class="kick">The Lunar Almanac · Pūrṇimānta</div>
   <h1>{_esc(cal.cover.title)} <span class="yr">{cal.samvat}</span></h1>
   <div class="sub">{_esc(cal.cover.subtitle)}</div>
