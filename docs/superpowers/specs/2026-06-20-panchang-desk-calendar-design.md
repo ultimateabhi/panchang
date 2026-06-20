@@ -25,6 +25,7 @@ right size.
 - No interactive UI, no web server, no print/bleed/CMYK production handling.
 - No automatic photo sourcing or download. Photos are local files referenced by the
   config (reused from `vs2083_calendar/images/`).
+- **No logo.** The footer strip carries only the paksha legend.
 - No support for amānta reckoning in the sample (the engine is reckoning-agnostic in
   that it just maps supplied dates, but the sample and labels assume pūrṇimānta).
 
@@ -60,7 +61,7 @@ the (slightly smaller) calendar table within the right column.
 │  │                         │   ├─ weekday header ─────────┤ │
 │  │                         │   │ र सो मं बु गु शु श          │ │
 │  │                         │   │ [ lunar-range date grid ]│ │
-│  └─────────────────────────┘   └──────────────┐ [ logo ]  │ │
+│  └─────────────────────────┘   └─ paksha legend ──────────┘ │
 └───────────────────────────────────────────────────────────┘
 ```
 
@@ -77,8 +78,7 @@ the (slightly smaller) calendar table within the right column.
   3. **Weekday header** — Devanagari weekday initials (र सो मं बु गु शु श),
      accent-colored bar.
   4. **Lunar-range date grid** — see §6.
-  5. **Footer strip** — a small **swappable logo** (config path) plus a compact
-     paksha legend.
+  5. **Footer strip** — a compact Krishna/Shukla paksha legend.
 - **Vertical budget** (~80 mm usable after the top safe strip): title ~12 mm,
   quote ~16–18 mm, weekday header ~5 mm, grid ~40 mm (≈6.5 mm/row for 6 rows),
   footer ~6 mm. Tight but feasible. Grid row height **auto-scales** to the number of
@@ -138,7 +138,6 @@ panchang_calendar/
     vs2083.yaml          # sample, pre-filled from PANCHANG_VS2083_REFERENCE.md
   assets/
     images/01.jpg … 13.jpg   # copied from vs2083_calendar/images/
-    logo.png             # default swappable logo (derived from SG.jpg)
   out/                   # build output: calendar.pdf + pages/NN_<slug>.png
   README.md
   requirements.txt
@@ -173,7 +172,7 @@ panchang_calendar/
 
 1. `config.py` loads `vs2083.yaml` → `Calendar` model; page list = `[cover] + months`.
 2. For each page, `layout.py` builds a standalone HTML doc (inline `<style>`, fonts
-   referenced as bundled `file://` `@font-face`, photo + logo embedded as base64 so
+   referenced as bundled `file://` `@font-face`, photo embedded as base64 so
    the PDF is self-contained and rendering is order-independent).
 3. `render.py` opens one Chromium page per panel:
    - **PNG**: set viewport `3000 × 1050`, `device_scale_factor = dpi/96` is *not*
@@ -226,7 +225,6 @@ theme:
     sharad:   { accent: "#C0561E", shukla: "#f9e8dd", krishna: "#f0d4c4" }
     hemanta:  { accent: "#5B4B9A", shukla: "#eae5f4", krishna: "#d9d2ea" }
     shishira: { accent: "#3F6B8C", shukla: "#e2ecf2", krishna: "#cddde8" }
-  logo: assets/logo.png
 months:
   - name_dev: "चैत्र"
     name_rom: "Chaitra"
@@ -264,20 +262,20 @@ no code changes required.**
   `photo`, `quote.text`. Missing → clear error naming the month index.
 - `start ≤ amavasya ≤ end`; otherwise error.
 - `ritu` must be a key present in `theme.ritu`.
-- `photo` and `logo` paths must exist (error lists the missing path).
+- `photo` path must exist (error lists the missing path).
 - `festivals[].tithi` must parse as `K<n>`/`S<n>`/`Amavasya`, or provide `date`.
 
 ## 13. Deliverables
 
 - The generator (`generate.py` + `panchang/` package).
 - The sample `config/vs2083.yaml` + the 13 month photos (copied from
-  `vs2083_calendar/images/`) + a default `assets/logo.png` (from `SG.jpg`).
+  `vs2083_calendar/images/`).
 - `requirements.txt` (`pyyaml`, `playwright`, `pypdf`) + a note to run
   `playwright install chromium`.
 - Build output committed-or-gitignored under `out/`: `calendar.pdf` (14 pages) +
   `pages/*.png` (3000×1050).
 - A short **README**: how to run; how the config maps to the layout; how to swap
-  photos, the logo, fonts, and dimensions.
+  photos, fonts, and dimensions.
 
 ## 14. Dependencies & environment
 
