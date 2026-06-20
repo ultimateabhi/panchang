@@ -1,4 +1,71 @@
-You are very skilled graphic designer, with a very technical background in programming. You work for a company like printo, where you want to create a code repository that can generate design images/pdf files that we can upload to print long desktop calendars like in this webpage: https://printo.in/categories/desk-calendars/customizable-products/long-desktop-calendar
+# Role
 
+You are a highly skilled graphic designer with a strong programming background.
+Build a small, reusable code repository that generates the **design files** (PDF +
+high-resolution images) for a **Panchang (Indian luni-solar) desk calendar** in the
+"long desktop calendar" tent format, like this product:
+https://printo.in/categories/desk-calendars/customizable-products/long-desktop-calendar
 
-But instead of a Gregorian calendar, I want the panchang calendar like we created in the other conversation. Although with different formatting/design.
+This is NOT a Gregorian calendar. It is a Vikram Samvat panchang calendar — laid out
+for the long desktop tent format, in a fresh design (below) rather than the grid
+wall-calendar look from the earlier conversation. Your only job is to produce the
+artwork at the right size; printing/production is handled elsewhere.
+
+# Page size
+
+  - Each panel: **10 in × 3.5 in (254 mm × 88.9 mm), landscape**, the long desktop
+    proportion. Export at print resolution (300 DPI).
+  - The calendar is a tent that binds along the **top** edge, so keep the topmost
+    strip clear of important text/art.
+
+# Number of pages — driven by the calendar, not hard-coded
+
+A Vikram Samvat year has **12 or 13 lunar months** (13 in a leap year, which adds an
+adhika/extra month). The generator must produce **one panel per lunar month present
+in the config, plus one cover page** — so the page count is **13 or 14** depending on
+the year. Never assume a fixed number; derive it from the config.
+
+# Layout (per month panel) — follow the reference
+
+Match the look of **Long-desktop_design.png** in this folder:
+  - **Left ~60%:** a large photograph for the month.
+  - **Right ~40%:** a calendar block on a light/parchment background with a month
+    title, a weekday header row, the date grid, and a small swappable logo area at
+    the bottom.
+Adapt this frame for panchang content; keep it calm and premium, legible at 3.5 in tall.
+
+# Content — driven entirely by a config file (no astronomy in code)
+
+Do not compute tithis/nakshatras astronomically. Read everything from a
+human-editable config (YAML or JSON) so dates can be supplied and verified by hand;
+the generator only does layout + rendering. The config defines:
+
+  - Calendar identity: samvat year, reckoning (pūrṇimānta), Gregorian span, and the
+    cover-page content.
+  - For **each lunar month** (12 or 13 entries):
+      - month name (Devanagari + romanized), with an `adhika`/leap flag;
+      - the month's **start and end Gregorian dates** (its alignment to the Gregorian
+        calendar), so the grid knows which days to render;
+      - season label (optional);
+      - the month's photo (path to an image);
+      - **festivals/markers**: dates to highlight, each with a date + label.
+  - Styling tokens (colours, fonts).
+
+In each date cell show the Gregorian day number and, where useful, the tithi/paksha
+label from the config. Highlight weekends and festival days with a clear accent
+colour, as in the reference.
+
+Ship a well-commented **sample config pre-filled with Vikram Samvat 2083**
+(pūrṇimānta, 4 Mar 2026 – 23 Mar 2027 — a 13-month leap year) plus sample festivals,
+and an `images/` folder with placeholder month photos, so the repo produces a
+complete calendar out of the box. Editing the calendar = editing the config; no code
+changes required.
+
+# Deliverables
+
+  - A generator (Python preferred) that reads the config + images and emits a
+    multi-page **PDF** and **per-page PNGs** at 300 DPI, page count derived from the
+    config.
+  - The sample VS 2083 config and placeholder images.
+  - A short README: how to run, how the config maps to the layout, and how to swap
+    photos, the logo, fonts, and dimensions.
