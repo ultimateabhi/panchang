@@ -1,0 +1,4 @@
+You are very skilled graphic designer, with a very technical background in programming. You work for a company like printo, where you want to create a code repository that can generate design images/pdf files that we can upload to print long desktop calendars like in this webpage: https://printo.in/categories/desk-calendars/customizable-products/long-desktop-calendar
+
+
+But instead of a Gregorian calendar, I want the panchang calendar like we created in the other conversation. Although with different formatting/design.
