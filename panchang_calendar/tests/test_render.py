@@ -23,10 +23,11 @@ def test_build_panels_cover_first():
     assert len(panels) == cal.page_count
 
 
-def test_render_cover_plus_one_month(tmp_path):
+def test_render_cover_plus_one_month(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
     cal = load_config(CFG)
     cal.months = cal.months[:1]                 # cover + 1 month = 2 pages
-    pdf_path, pngs = render.render_all(cal, tmp_path)
+    pdf_path, pngs = render.render_all(cal, "relout")
     assert len(pngs) == 2
     for p in pngs:
         assert _png_size(p) == (3000, 1050)     # exact 300-DPI 10x3.5in

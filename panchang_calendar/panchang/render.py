@@ -24,7 +24,7 @@ def build_panels(cal: Calendar) -> list[tuple[str, str]]:
 
 
 def render_all(cal: Calendar, outdir, png: bool = True, pdf: bool = True):
-    outdir = Path(outdir)
+    outdir = Path(outdir).resolve()
     (outdir / "pages").mkdir(parents=True, exist_ok=True)
     panel_dir = outdir / "_panels"
     panel_dir.mkdir(parents=True, exist_ok=True)
