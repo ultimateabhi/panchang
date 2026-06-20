@@ -7,9 +7,17 @@ high-resolution images) for a **Panchang (Indian luni-solar) desk calendar** in 
 https://printo.in/categories/desk-calendars/customizable-products/long-desktop-calendar
 
 This is NOT a Gregorian calendar. It is a Vikram Samvat panchang calendar — laid out
-for the long desktop tent format, in a fresh design (below) rather than the grid
-wall-calendar look from the earlier conversation. Your only job is to produce the
+for the long desktop tent format, in a **fresh design** (below). A prior grid
+wall-calendar build of the same panchang already exists in `vs2083_calendar/`; reuse
+its data and assets, but do not copy its grid look. Your only job is to produce the
 artwork at the right size; printing/production is handled elsewhere.
+
+All references are files in this project directory:
+  - `PANCHANG_VS2083_REFERENCE.md` — canonical panchang data (reckoning, month
+    boundaries, festivals, season colours) to drive the calendar.
+  - `Long-desktop_design.png` — the target visual design.
+  - `vs2083_calendar/` — the existing generator, README, and per-month photos
+    (`images/01.jpg … 13.jpg`) to reuse.
 
 # Page size
 
@@ -28,7 +36,8 @@ the year. Never assume a fixed number; derive it from the config.
 # Layout (per month panel) — follow the reference
 
 Match the look of **Long-desktop_design.png** in this folder:
-  - **Left ~60%:** a large photograph for the month.
+  - **Left ~60%:** a large photograph for the month, with the month's **quote +
+    attribution** set over/beside it (text from the config).
   - **Right ~40%:** a calendar block on a light/parchment background with a month
     title, a weekday header row, the date grid, and a small swappable logo area at
     the bottom.
@@ -48,6 +57,8 @@ the generator only does layout + rendering. The config defines:
         calendar), so the grid knows which days to render;
       - season label (optional);
       - the month's photo (path to an image);
+      - the month's **quote**: text + attribution, shown alongside the photo
+        (see `PANCHANG_VS2083_REFERENCE.md` for the per-month quotes);
       - **festivals/markers**: dates to highlight, each with a date + label.
   - Styling tokens (colours, fonts).
 
@@ -55,17 +66,18 @@ In each date cell show the Gregorian day number and, where useful, the tithi/pak
 label from the config. Highlight weekends and festival days with a clear accent
 colour, as in the reference.
 
-Ship a well-commented **sample config pre-filled with Vikram Samvat 2083**
-(pūrṇimānta, 4 Mar 2026 – 23 Mar 2027 — a 13-month leap year) plus sample festivals,
-and an `images/` folder with placeholder month photos, so the repo produces a
-complete calendar out of the box. Editing the calendar = editing the config; no code
-changes required.
+Ship a well-commented **sample config pre-filled from `PANCHANG_VS2083_REFERENCE.md`**
+(Vikram Samvat 2083, pūrṇimānta, 4 Mar 2026 – 23 Mar 2027 — a 13-month leap year,
+including the festivals and per-month season colours in that file), using the month
+photos in `vs2083_calendar/images/`, so the repo produces a complete calendar out of
+the box. Editing the calendar = editing the config; no code changes required.
 
 # Deliverables
 
   - A generator (Python preferred) that reads the config + images and emits a
     multi-page **PDF** and **per-page PNGs** at 300 DPI, page count derived from the
     config.
-  - The sample VS 2083 config and placeholder images.
+  - The sample VS 2083 config (from `PANCHANG_VS2083_REFERENCE.md`) and the month
+    photos from `vs2083_calendar/images/`.
   - A short README: how to run, how the config maps to the layout, and how to swap
     photos, the logo, fonts, and dimensions.
