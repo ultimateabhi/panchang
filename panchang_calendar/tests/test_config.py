@@ -70,3 +70,29 @@ def test_missing_photo(tmp_path):
     p.write_text(VALID, encoding="utf-8")          # note: no photo.jpg written
     with pytest.raises(ConfigError, match="photo"):
         load_config(p)
+
+
+def test_festival_label_no_tithi_no_date(tmp_path):
+    """A festival with a label but neither tithi nor date must raise ConfigError."""
+    bad = VALID.replace(
+        "    festivals:\n"
+        "      - {tithi: \"S1\", label: \"Gudi Padwa\"}\n"
+        "      - {date: 2026-03-20, label: \"Fixed\"}\n",
+        "    festivals:\n"
+        "      - {label: \"Orphan Festival\"}\n",
+    )
+    with pytest.raises(ConfigError, match="tithi"):
+        load_config(_write(tmp_path, bad))
+
+
+def test_festival_invalid_tithi_format(tmp_path):
+    """A festival with an invalid tithi format like 'X9' must raise ConfigError."""
+    bad = VALID.replace(
+        "    festivals:\n"
+        "      - {tithi: \"S1\", label: \"Gudi Padwa\"}\n"
+        "      - {date: 2026-03-20, label: \"Fixed\"}\n",
+        "    festivals:\n"
+        "      - {tithi: \"X9\", label: \"Bad Tithi\"}\n",
+    )
+    with pytest.raises(ConfigError, match="tithi"):
+        load_config(_write(tmp_path, bad))

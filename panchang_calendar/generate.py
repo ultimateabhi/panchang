@@ -30,6 +30,11 @@ def main(argv=None):
                     help="Render only the first N months (preview); 0 = all")
     args = ap.parse_args(argv)
 
+    if args.png_only and args.pdf_only:
+        ap.error("--png-only and --pdf-only are mutually exclusive")
+    if args.months < 0:
+        ap.error("--months must be >= 0")
+
     t0 = time.time()
     cal = load_config(args.config)
     if args.months > 0:

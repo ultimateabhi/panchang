@@ -38,7 +38,6 @@ body {{ font-family:'{f.serif}','Noto Serif',serif; color:#241d16;
        -webkit-print-color-adjust:exact; print-color-adjust:exact; }}
 .dev {{ font-family:'{f.devanagari}','Noto Sans Devanagari',sans-serif; }}
 .panel {{ width:{w}px; height:{h}px; display:flex; overflow:hidden; background:#fbf8f1; }}
-.top-safe {{ height:{top_safe_px}px; }}
 /* ----- photo (left) ----- */
 .photo {{ flex:0 0 {100 - cal_pct}%; background-size:cover; background-position:center;
           position:relative; }}
@@ -136,6 +135,7 @@ def month_html(cal: Calendar, m: MonthData) -> str:
 
 def cover_html(cal: Calendar) -> str:
     pal = cal.theme.ritu[cal.months[0].ritu]
+    top_safe_px = round(cal.theme.page.top_safe_mm / 25.4 * 96)
     rows = ""
     for m in cal.months:
         pal_m = cal.theme.ritu[m.ritu]
@@ -148,18 +148,18 @@ def cover_html(cal: Calendar) -> str:
                  f'<td class="cse" style="color:{_esc(pal_m.accent)}">'
                  f'{_esc(m.season_label.split(" ")[0])}</td></tr>')
 
-    extra = """
-.cover { display:flex; flex-direction:column; padding:30px 28px 14px; height:336px; }
-.cover .kick { letter-spacing:.28em; text-transform:uppercase; font-size:8px; color:#9a6a2c; }
-.cover h1 { font-size:30px; line-height:1.05; color:#7a3b14; margin:3px 0; }
-.cover h1 .yr { color:#c0561e; }
-.cover .sub { font-size:10px; color:#3a2f25; margin-bottom:4px; }
-.cover .note { font-size:7.5px; line-height:1.5; color:#4a4036; margin-bottom:6px; }
-.cov-tbl { width:100%; border-collapse:collapse; }
-.cov-tbl td { padding:1.5px 6px; border-bottom:.5px solid #e3dccf; font-size:8.5px; text-align:left; }
-.cov-tbl .ci { font-weight:700; width:22px; }
-.cov-tbl .cspan { color:#5d5345; white-space:nowrap; }
-.cov-tbl .cse { white-space:nowrap; }
+    extra = f"""
+.cover {{ display:flex; flex-direction:column; padding:{top_safe_px}px 28px 14px; height:336px; }}
+.cover .kick {{ letter-spacing:.28em; text-transform:uppercase; font-size:8px; color:#9a6a2c; }}
+.cover h1 {{ font-size:30px; line-height:1.05; color:#7a3b14; margin:3px 0; }}
+.cover h1 .yr {{ color:#c0561e; }}
+.cover .sub {{ font-size:10px; color:#3a2f25; margin-bottom:4px; }}
+.cover .note {{ font-size:7.5px; line-height:1.5; color:#4a4036; margin-bottom:6px; }}
+.cov-tbl {{ width:100%; border-collapse:collapse; }}
+.cov-tbl td {{ padding:1.5px 6px; border-bottom:.5px solid #e3dccf; font-size:8.5px; text-align:left; }}
+.cov-tbl .ci {{ font-weight:700; width:22px; }}
+.cov-tbl .cspan {{ color:#5d5345; white-space:nowrap; }}
+.cov-tbl .cse {{ white-space:nowrap; }}
 """
     body = f"""<section class="panel cover" style="--accent:{_esc(pal.accent)}">
   <div class="kick">The Lunar Almanac · Pūrṇimānta</div>

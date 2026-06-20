@@ -1,6 +1,5 @@
 import struct
 from pathlib import Path
-from copy import copy
 from pypdf import PdfReader
 from panchang.config import load_config
 from panchang import render

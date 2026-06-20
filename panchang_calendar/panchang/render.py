@@ -1,5 +1,6 @@
 """Render panel HTML to 300-DPI PNGs and a merged PDF via Playwright Chromium."""
 from __future__ import annotations
+import shutil
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
@@ -41,22 +42,24 @@ def render_all(cal: Calendar, outdir, png: bool = True, pdf: bool = True):
             html_path.write_text(html, encoding="utf-8")
             page = browser.new_page(viewport={"width": w, "height": h},
                                     device_scale_factor=scale)
-            page.goto(html_path.as_uri())
-            page.wait_for_timeout(250)          # let fonts/layout settle
-            if png:
-                pp = outdir / "pages" / f"{name}.png"
-                page.screenshot(path=str(pp),
-                                clip={"x": 0, "y": 0, "width": w, "height": h})
-                png_paths.append(pp)
-            if pdf:
-                dp = panel_dir / f"{name}.pdf"
-                page.pdf(path=str(dp),
-                         width=f"{cal.theme.page.width_in}in",
-                         height=f"{cal.theme.page.height_in}in",
-                         print_background=True,
-                         margin={"top": "0", "bottom": "0", "left": "0", "right": "0"})
-                pdf_paths.append(dp)
-            page.close()
+            try:
+                page.goto(html_path.as_uri())
+                page.wait_for_timeout(250)          # let fonts/layout settle
+                if png:
+                    pp = outdir / "pages" / f"{name}.png"
+                    page.screenshot(path=str(pp),
+                                    clip={"x": 0, "y": 0, "width": w, "height": h})
+                    png_paths.append(pp)
+                if pdf:
+                    dp = panel_dir / f"{name}.pdf"
+                    page.pdf(path=str(dp),
+                             width=f"{cal.theme.page.width_in}in",
+                             height=f"{cal.theme.page.height_in}in",
+                             print_background=True,
+                             margin={"top": "0", "bottom": "0", "left": "0", "right": "0"})
+                    pdf_paths.append(dp)
+            finally:
+                page.close()
         browser.close()
 
     merged = None
@@ -67,4 +70,5 @@ def render_all(cal: Calendar, outdir, png: bool = True, pdf: bool = True):
             writer.append(str(dp))
         with open(merged, "wb") as f:
             writer.write(f)
+    shutil.rmtree(panel_dir, ignore_errors=True)
     return merged, png_paths
